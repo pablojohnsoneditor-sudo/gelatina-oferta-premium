@@ -709,9 +709,12 @@
     }, 1000);
   })();
 
+  function genEventId() { return 'eid_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); }
+
   // CTA TRACKING
   document.getElementById('ctaBtn').addEventListener('click', function() {
-    fbq('track', 'InitiateCheckout', {value: 997, currency: 'BRL'});
+    var eventId = genEventId();
+    fbq('track', 'InitiateCheckout', {value: 997, currency: 'BRL'}, {eventID: eventId});
     fbq('trackCustom', 'premium_cta_click');
     if (typeof gtag !== 'undefined') gtag('event', 'premium_cta_click');
   });
